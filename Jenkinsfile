@@ -15,14 +15,14 @@ node {
     stage name: 'Checkout source', concurrency: 1
     
     checkout scm
-    sh 'sudo zypper update'
+    sh 'zypper update'
     
     //Stage unit tests
     stage name: 'Unit tests', concurrency: 1
     
     dir ('src') { 
-        sh 'sudo make --warn-undefined-variables test_valgrind'
-        sh 'sudo make clean'
+        sh 'make --warn-undefined-variables test_valgrind'
+        sh 'make clean'
     }
     
     //Stage code scanners
@@ -36,28 +36,28 @@ node {
     stage name: 'Standard OSSEC compilations', concurrency: 1 
     
     dir ('src') {
-        sh 'sudo make --warn-undefined-variables V=1 TARGET=agent install'
-        sh 'sudo make clean && sudo rm -rf /var/ossec/'
-        sh 'sudo make --warn-undefined-variables V=1 TARGET=server install'
-        sh 'sudo make clean'
+        sh 'make --warn-undefined-variables V=1 TARGET=agent install'
+        sh 'make clean && sudo rm -rf /var/ossec/'
+        sh 'make --warn-undefined-variables V=1 TARGET=server install'
+        sh 'make clean'
     }  
     
     //Stage rule tests
     stage name: 'Rule tests', concurrency: 1 
     
     dir ('src') {
-        sh 'sudo cat /var/ossec/etc/ossec.conf'
-        sh 'sudo make V=1 TARGET=server test-rules'
+        sh 'cat /var/ossec/etc/ossec.conf'
+        sh 'make V=1 TARGET=server test-rules'
     }
     
     //Stage advanced ossec compilation
     stage name: 'Advanced OSSEC compilations', concurrency: 1 
     
     dir ('src') {
-        sh 'sudo make --warn-undefined-variables V=1 TARGET=local install'
-        sh 'sudo make clean && sudo rm -rf /var/ossec/'
-        sh 'sudo make --warn-undefined-variables V=1 TARGET=hybrid install'
-        sh 'sudo make clean && sudo rm -rf /var/ossec/'
+        sh 'make --warn-undefined-variables V=1 TARGET=local install'
+        sh 'make clean && sudo rm -rf /var/ossec/'
+        sh 'make --warn-undefined-variables V=1 TARGET=hybrid install'
+        sh 'make clean && sudo rm -rf /var/ossec/'
     
         def matrixOptionsX = ['DATABASE=none', 'DATABASE=pgsql', 'DATABASE=mysql']
         def matrixOptionsY = ['USE_GEOIP=1', '']    
@@ -66,8 +66,8 @@ node {
         
         for (optionX in matrixOptionsX){
             for (optionY in matrixOptionsY) {
-                sh 'sudo make --warn-undefined-variables V=1 TARGET=server '+optionX+' '+optionY+' install'
-                sh 'sudo make clean && sudo rm -rf /var/ossec/'
+                sh 'make --warn-undefined-variables V=1 TARGET=server '+optionX+' '+optionY+' install'
+                sh 'make clean && sudo rm -rf /var/ossec/'
             }
         }
     }
@@ -77,8 +77,8 @@ node {
     
     dir ('src') {
         //sh 'sudo zypper -n install aptitude && sudo aptitude -y install mingw-w64 nsis'
-        sh 'sudo make --warn-undefined-variables TARGET=winagent'
-        sh 'sudo make clean && sudo rm -rf /var/ossec/'
+        sh 'make --warn-undefined-variables TARGET=winagent'
+        sh 'make clean && sudo rm -rf /var/ossec/'
     }
     
 }
