@@ -15,7 +15,7 @@ node {
     stage name: 'Checkout source', concurrency: 1
     
     checkout scm
-    sh 'sudo apt-get update'
+    sh 'sudo zypper update'
     
     //Stage unit tests
     stage name: 'Unit tests', concurrency: 1
@@ -62,7 +62,7 @@ node {
         def matrixOptionsX = ['DATABASE=none', 'DATABASE=pgsql', 'DATABASE=mysql']
         def matrixOptionsY = ['USE_GEOIP=1', '']    
         
-        sh 'sudo apt-get -y install geoip-bin geoip-database libgeoip-dev libgeoip1 libpq-dev libpq5 libmysqlclient-dev'        
+        //sh 'sudo zypper -n install geoip-bin geoip-database libgeoip-dev libgeoip1 libpq-dev libpq5 libmysqlclient-dev'        
         
         for (optionX in matrixOptionsX){
             for (optionY in matrixOptionsY) {
@@ -76,7 +76,7 @@ node {
     stage name: 'Windows compilation', concurrency: 1
     
     dir ('src') {
-        sh 'sudo apt-get -y install aptitude && sudo aptitude -y install mingw-w64 nsis'
+        //sh 'sudo zypper -n install aptitude && sudo aptitude -y install mingw-w64 nsis'
         sh 'sudo make --warn-undefined-variables TARGET=winagent'
         sh 'sudo make clean && sudo rm -rf /var/ossec/'
     }
