@@ -15,7 +15,7 @@ node {
     stage name: 'Checkout source', concurrency: 1
     
     checkout scm
-    sh 'zypper update'
+    sh 'sudo zypper update'
     
     //Stage unit tests
     stage name: 'Unit tests', concurrency: 1
