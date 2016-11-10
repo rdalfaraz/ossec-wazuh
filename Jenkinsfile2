@@ -83,16 +83,19 @@ for (x in platforms) {
     def platform = x
         
     stage (platform) {
+        def versions = 'na'
         if (platform == "ubuntu"){
-            def versions = platform_ubuntu
+            versions = platform_ubuntu
         }
         else if (platform == "debian"){
-            def versions = platform_debian
+            versions = platform_debian
         }
         else (platform == "centos"){
-            def versions = platform_centos
+            versions = platform_centos
         }
         
+     
+     
         stage ('Checkout SCM'){
             def builders = [:]
             for (y in versions) {
