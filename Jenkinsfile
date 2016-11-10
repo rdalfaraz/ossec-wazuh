@@ -12,7 +12,7 @@
  */
 
 
-def labels = ['centos-7-slave','ubuntu-xenial-slave', 'ubuntu-trusty-slave', 'debian-8-slave', 'debian-7-slave']
+def labels = ['centos-7-slave', 'debian-8-slave']
 
 //Stage checkout source
 def check_source(label){
@@ -92,11 +92,15 @@ for (x in labels) {
 
     stage (label){
         node(label) {
-            stage ('Checkout source'){
+            stage ('Checkout SCM'){
                 check_source(label)
             }
             stage ('Unit Tests'){
                 unit_tests(label)
+            }
+            
+            stage ('Code scanner'){
+                //Coverity
             }
             stage ('Standard Compilations'){
                 standard_compilations(label)
