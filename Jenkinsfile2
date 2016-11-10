@@ -93,7 +93,7 @@ for (x in platforms) {
             versions = platform_centos
         }
         
-     
+     /*
      
         stage ('Checkout SCM'){
             def builders = [:]
@@ -108,7 +108,7 @@ for (x in platforms) {
             }
             parallel builders
         }
-
+*/
      
         stage ('Unit Tests'){
             def builders = [:]
