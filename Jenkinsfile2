@@ -82,7 +82,7 @@ for (x in platforms) {
     def platform = x
         
     stage (platform) {
-     def versions = 'string'
+     def versions = []
         if (platform == "ubuntu"){
             versions = platform_ubuntu
         }
@@ -98,7 +98,7 @@ for (x in platforms) {
         stage ('Checkout SCM'){
             def builders = [:]
             for (y in versions) {
-                def version = y // Need to bind the label variable before the closure - cant do for (label in labels)
+                def version = y
             
                 builders[version] = {
                     node(version) {
@@ -110,7 +110,7 @@ for (x in platforms) {
             parallel builders
         }
 
-     
+     /*
         stage ('Unit Tests'){
             def builders = [:]
             for (y in versions) {
@@ -124,7 +124,7 @@ for (x in platforms) {
             }
             parallel builders
         }
-
+*/
         // stage...
     }
 }
