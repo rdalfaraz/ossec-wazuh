@@ -124,6 +124,24 @@ for (x in platforms) {
             }
             parallel builders
         }
+     
+     
+     
+     
+        stage ('Standard compilations'){
+            def builders = [:]
+            for (y in versions) {
+                def version = y // Need to bind the label variable before the closure - cant do for (label in labels)
+            
+                builders[version] = {
+                    node(version) {
+                        check_source(version)
+                        standard_compilations(version)
+                    }
+                }
+            }
+            parallel builders
+        }
 
         // stage...
     }
