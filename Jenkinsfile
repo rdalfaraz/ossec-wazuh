@@ -17,11 +17,6 @@ def labels = ['centos-7-slave', 'debian-8-slave']
 //Stage checkout source
 def check_source(label){
     checkout scm
-    if(label != 'centos-7-slave'){
-        sh 'sudo apt-get update'
-    }else{
-        sh 'sudo yum -y update'
-    }
 }
 
 
@@ -48,8 +43,9 @@ def  standard_compilations(label){
 //Stage rule tests
 def rule_tests(label){ 
     dir ('src') {
-        sh 'sudo cat /var/ossec/etc/ossec.conf'
+        //sh 'sudo cat /var/ossec/etc/ossec.conf'
         sh 'sudo make V=1 TARGET=server test-rules'
+        sh 'sudo make clean && sudo rm -rf /var/ossec/'
     }
 }
 
@@ -78,23 +74,21 @@ def advanced_compilations(label){
 
 //Stage windows compilation
 def windows_compilation(label){ 
-   if(label != 'debian-7-slave'){
  
-        dir ('src') {
-            sh 'sudo make --warn-undefined-variables TARGET=winagent'
-            sh 'sudo make clean && sudo rm -rf /var/ossec/'
-        }
-   }
+    dir ('src') {
+        sh 'sudo make --warn-undefined-variables TARGET=winagent'
+        sh 'sudo make clean && sudo rm -rf /var/ossec/'
+    }
 }
 
-for (x in labels) {
-    def label = x
-
+for (label in labels) {
+    
     stage (label){
         node(label) {
             stage ('Checkout SCM'){
                 check_source(label)
             }
+            
             stage ('Unit Tests'){
                 unit_tests(label)
             }
@@ -102,15 +96,19 @@ for (x in labels) {
             stage ('Code scanner'){
                 //Coverity
             }
+            
             stage ('Standard Compilations'){
                 standard_compilations(label)
             }
+            
             stage ('Rule Tests'){
                 rule_tests(label)
             }
+            
             stage ('Advanced Compilations'){
                 advanced_compilations(label)
             }
+            
             stage ('Windows Compilation'){
                 windows_compilation(label)
             }
