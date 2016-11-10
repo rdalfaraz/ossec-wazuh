@@ -8,10 +8,10 @@
  * This program is a free software; you can redistribute it
  * and/or modify it under the terms of the GNU General Public
  * License (version 2) as published by the FSF - Free Software
- * Foundation.   'ubuntu', 'debian',
+ * Foundation.   'ubuntu', 'debian',  'centos'
  */
  
-def platforms = [ 'centos']
+def platforms = ['debian']
 def platform_ubuntu = ['ubuntu-xenial-slave', 'ubuntu-trusty-slave', 'ubuntu-precise-slave']
 def platform_debian = ['debian-8-slave', 'debian-7-slave']
 def platform_centos = ['centos-7-slave', 'centos-6-slave', 'centos-5-slave']
