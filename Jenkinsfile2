@@ -82,7 +82,7 @@ for (x in platforms) {
     def platform = x
         
     stage (platform) {
-     def versions = []
+     def versions = 'string'
         if (platform == "ubuntu"){
             versions = platform_ubuntu
         }
