@@ -35,7 +35,7 @@ def  standard_compilations(label){
         sh 'sudo make --warn-undefined-variables V=1 TARGET=agent install'
         sh 'sudo make clean && sudo rm -rf /var/ossec/'
         sh 'sudo make --warn-undefined-variables V=1 TARGET=server install'
-        sh 'sudo make clean'
+        sh 'sudo make clean && sudo rm -rf /var/ossec/'
     } 
 } 
 
@@ -43,7 +43,6 @@ def  standard_compilations(label){
 //Stage rule tests
 def rule_tests(label){ 
     dir ('src') {
-        //sh 'sudo cat /var/ossec/etc/ossec.conf'
         sh 'sudo make V=1 TARGET=server test-rules'
         sh 'sudo make clean && sudo rm -rf /var/ossec/'
     }
