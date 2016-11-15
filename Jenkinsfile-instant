@@ -11,7 +11,6 @@
  * Foundation.
  */
 
-
 def labels = ['centos-7-slave']//,'debian-jessie-slave']
 
 //Stage checkout source
