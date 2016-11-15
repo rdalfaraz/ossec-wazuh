@@ -11,7 +11,7 @@
  * Foundation.
  */
 
-def labels = ['ubuntu-xenial-slave', 'ubuntu-trusty-slave', 'ubuntu-precise-slave', 'debian-8-slave', 'debian-7-slave', 'centos-7-slave', 'centos-6-slave', 'centos-5-slave']
+def labels = ['ubuntu-xenial-slave', 'ubuntu-trusty-slave', 'ubuntu-precise-slave', 'debian-jessie-slave', 'debian-wheezy-slave', 'centos-7-slave', 'centos-6-slave', 'centos-5-slave']
 
 //Stage checkout source
 def check_source(label){
