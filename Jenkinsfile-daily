@@ -93,7 +93,7 @@ for (label in labels) {
             }
             
             stage ('Unit Tests'){
-                unit_tests(label)
+              //  unit_tests(label)
             }
             
             stage ('Code scanner'){
@@ -101,7 +101,7 @@ for (label in labels) {
             }
             
             stage ('Standard Compilations'){
-                standard_compilations(label)
+              //  standard_compilations(label)
             }
             
             stage ('Rule Tests'){
@@ -113,7 +113,7 @@ for (label in labels) {
             }
             
             stage ('Windows Compilation'){
-                windows_compilation(label)
+              //  windows_compilation(label)
             }
         }
     }
