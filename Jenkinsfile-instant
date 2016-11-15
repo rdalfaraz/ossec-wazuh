@@ -12,7 +12,7 @@
  */
 
 
-def labels = ['centos-7-slave','debian-jessie-slave']
+def labels = ['centos-7-slave']//,'debian-jessie-slave']
 
 //Stage checkout source
 def check_source(label){
