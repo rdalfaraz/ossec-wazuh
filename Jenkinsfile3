@@ -75,7 +75,7 @@ def advanced_compilations(label){
 
 //Stage windows compilation
 def windows_compilation(label){ 
-    if(label != 'ubuntu-precise-slave' && label != 'debian-7-slave' && label != 'centos-5-slave'){
+    if(label != 'ubuntu-precise-slave' && label != 'debian-wheezy-slave' && label != 'centos-5-slave'){
       dir ('src') {
           sh 'sudo make --warn-undefined-variables TARGET=winagent'
           sh 'sudo make clean && sudo rm -rf /var/ossec/'
