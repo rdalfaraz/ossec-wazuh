@@ -104,7 +104,7 @@ for (label in labels) {
             }
             
             stage ('Advanced Compilations'){
-             //   advanced_compilations(label)
+                advanced_compilations(label)
             }
             
             stage ('Windows Compilation'){
