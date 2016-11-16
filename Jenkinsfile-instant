@@ -20,7 +20,7 @@ def check_source(){
 
 
 //Stage unit tests
-def unit_tests(label){
+def unit_tests(){
     dir('src'){
         sh 'sudo make --warn-undefined-variables test_valgrind'
         sh 'sudo make clean'
@@ -88,7 +88,7 @@ def windows_compilation(label){
             }
             
             stage ('Unit Tests'){
-              //  unit_tests(label)
+                unit_tests(label)
             }
             
             stage ('Code scanner'){
