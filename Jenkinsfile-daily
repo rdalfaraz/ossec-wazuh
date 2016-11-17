@@ -96,10 +96,6 @@ for (label in labels) {
                 unit_tests(label)
             }
             
-            stage ('Code scanner'){
-                //Coverity
-            }
-            
             stage ('Standard Compilations'){
                 standard_compilations(label)
             }
