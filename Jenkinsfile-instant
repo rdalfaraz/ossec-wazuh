@@ -89,8 +89,7 @@ for (label in labels) {
             
             stage ('Unit Tests'){
                 unit_tests()
-            }
-            
+            }          
                      
             stage ('Standard Compilations'){
                 standard_compilations(label)
