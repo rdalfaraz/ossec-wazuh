@@ -20,7 +20,7 @@ def check_source(){
 
 
 //Stage unit tests
-def unit_tests(){
+def unit_tests(label){
     dir('src'){
         sh 'sudo make --warn-undefined-variables test_valgrind'
         sh 'sudo make clean'
@@ -79,10 +79,10 @@ def windows_compilation(label){
     }
 }
 
-//for (label in labels) {
+for (label in labels) {
     
-  //  stage (label){
-        node(/*label*/) {
+    stage (label){
+        node(label) {
             stage ('Checkout SCM'){
                 check_source()
             }
@@ -91,25 +91,22 @@ def windows_compilation(label){
                 unit_tests()
             }
             
-            stage ('Code scanner'){
-                //Coverity
-            }
-            
+                     
             stage ('Standard Compilations'){
-                //standard_compilations(label)
+                standard_compilations(label)
             }
             
             stage ('Rule Tests'){
-              //  rule_tests(label)
+                rule_tests(label)
             }
             
             stage ('Advanced Compilations'){
-             //   advanced_compilations(label)
+                advanced_compilations(label)
             }
             
             stage ('Windows Compilation'){
-             //   windows_compilation(label)
+                windows_compilation(label)
             }
         }
-   // }
-//}
+   }
+}
