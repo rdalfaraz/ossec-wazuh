@@ -79,8 +79,7 @@ def windows_compilation(label){
     }
 }
 
-for (label in labels) {
-    
+for (label in labels) {   
     stage (label){
         node(label) {
             stage ('Checkout SCM'){
