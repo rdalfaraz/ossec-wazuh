@@ -14,7 +14,7 @@
 def labels = ['centos-7-slave', 'debian-jessie-slave']
 
 //Stage checkout source
-def check_source(){
+def check_source(label){
     checkout scm
 }
 
@@ -84,11 +84,11 @@ for (label in labels) {
     stage (label){
         node(label) {
             stage ('Checkout SCM'){
-                check_source()
+                check_source(label)
             }
             
             stage ('Unit Tests'){
-                unit_tests()
+                unit_tests(label)
             }          
                      
             stage ('Standard Compilations'){
