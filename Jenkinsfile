@@ -97,19 +97,19 @@ for (label in labels) {
             }
             
             stage ('Standard Compilations'){
-               // standard_compilations(label)
+                standard_compilations(label)
             }
             
             stage ('Rule Tests'){
-              //  rule_tests(label)
+                rule_tests(label)
             }
             
             stage ('Advanced Compilations'){
-              //  advanced_compilations(label)
+                advanced_compilations(label)
             }
             
             stage ('Windows Compilation'){
-                //windows_compilation(label)
+                windows_compilation(label)
             }
         }
     }
