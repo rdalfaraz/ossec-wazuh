@@ -11,11 +11,17 @@
  * Foundation.
  */
 
-def labels = ['ubuntu-xenial-slave']
+def labels = ['ubuntu']
 
 //Stage checkout source
 def check_source(label){
-    checkout scm
+    sh 'sudo apt-get update'
+    sh 'sudo apt-get install -y curl apt-transport-https'
+    sh 'curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | apt-key add -'
+    sh 'echo "deb https://packages.wazuh.com/apt xenial main" | tee /etc/apt/sources.list.d/wazuh.list'
+    sh 'sudo apt-get update'
+    sh 'sudo apt-get install -y wazuh-manager'
+    sh 'service wazuh-api status'
 }
 
 
@@ -88,7 +94,7 @@ for (label in labels) {
         node(label) {
    
             
-            stage ('Checkout SCM'){
+            stage ('Add repositories'){
                 check_source(label)
             }
             
@@ -97,19 +103,19 @@ for (label in labels) {
             }
             
             stage ('Standard Compilations'){
-                standard_compilations(label)
+                //standard_compilations(label)
             }
             
             stage ('Rule Tests'){
-                rule_tests(label)
+               // rule_tests(label)
             }
             
             stage ('Advanced Compilations'){
-                advanced_compilations(label)
+              //  advanced_compilations(label)
             }
             
             stage ('Windows Compilation'){
-                windows_compilation(label)
+             //   windows_compilation(label)
             }
         }
     }
