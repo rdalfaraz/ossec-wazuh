@@ -11,7 +11,7 @@
  * Foundation.
  */
 
-def labels = ['ubuntu-xenial-slave']
+def labels = ['debian-jessie-slave']
 
 //Stage checkout source
 def check_source(label){
